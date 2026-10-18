@@ -7,6 +7,7 @@ local playerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 local ENDPOINT = "https://scriptkeeper-hub.lovable.app/api/public/validate"
 local SAVE_FILE = "sghub_key.txt"
+local LOGO_IMAGE = "rbxassetid://135250011530176"
 local req = (syn and syn.request) or http_request or request
 
 local NEON1 = Color3.fromRGB(255, 30, 90)
@@ -129,17 +130,19 @@ local function showWindow(prefill)
     glowSt.Transparency = 0.75
     glowSt.Parent = glow
 
-    local badge = Instance.new("TextLabel")
+    local badge = Instance.new("ImageLabel")
     badge.Size = UDim2.new(0, 42, 0, 42)
     badge.Position = UDim2.new(0, 20, 0, 18)
-    badge.BackgroundColor3 = Color3.new(1, 1, 1)
-    badge.Text = "SG"
-    badge.TextColor3 = Color3.new(1, 1, 1)
-    badge.TextSize = 17
-    badge.Font = Enum.Font.GothamBlack
+    badge.BackgroundColor3 = PANEL
+    badge.Image = LOGO_IMAGE
+    badge.ScaleType = Enum.ScaleType.Crop
     badge.Parent = frame
     corner(badge, 12)
-    neonGradient(badge, 45)
+    local badgeSt = Instance.new("UIStroke")
+    badgeSt.Thickness = 2
+    badgeSt.Color = Color3.new(1, 1, 1)
+    badgeSt.Parent = badge
+    neonGradient(badgeSt, 45)
 
     local title = Instance.new("TextLabel")
     title.Position = UDim2.new(0, 74, 0, 16)
