@@ -262,7 +262,7 @@ local function showWindow(prefill)
     foot.Size = UDim2.new(1, 0, 0, 14)
     foot.BackgroundTransparency = 1
     foot.Text = "SG HUB · licencia protegida"
-    foot.TextColor3 = Color3.fromRGB(100, 60, 80)
+    foot.TextColor3 = Color3.fromRGB(255, 255, 0)
     foot.TextSize = 10
     foot.Font = Enum.Font.Gotham
     foot.Parent = frame
