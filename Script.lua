@@ -10,12 +10,15 @@ local SAVE_FILE = "sghub_key.txt"
 local LOGO_IMAGE = "rbxassetid://135250011530176"
 local req = (syn and syn.request) or http_request or request
 
-local NEON1 = Color3.fromRGB(255, 225, 0)
-local NEON2 = Color3.fromRGB(255, 0, 190)
-local BG = Color3.fromRGB(10, 4, 9)
-local PANEL = Color3.fromRGB(255, 225, 0)
-local OK = Color3.fromRGB(60, 255, 150)
-local WARN = Color3.fromRGB(255, 190, 80)
+-- ==========================================
+-- COLORES: TEMA AMARILLO DULCE / DORADO SUAVE
+-- ==========================================
+local NEON1 = Color3.fromRGB(235, 185, 50)  -- Amarillo dorado suave principal
+local NEON2 = Color3.fromRGB(215, 160, 35)  -- Amarillo cálido secundario
+local BG = Color3.fromRGB(15, 14, 10)       -- Fondo oscuro con un leve toque cálido
+local PANEL = Color3.fromRGB(25, 23, 16)    -- Paneles e inputs
+local OK = Color3.fromRGB(80, 230, 120)     -- Verde de éxito
+local WARN = Color3.fromRGB(240, 100, 80)   -- Rojo/Naranja de advertencia
 
 pcall(function() playerGui:FindFirstChild("SGKeyWindow"):Destroy() end)
 pcall(function() game:GetService("CoreGui"):FindFirstChild("SGKeyWindow"):Destroy() end)
@@ -162,7 +165,7 @@ local function showWindow(prefill)
     sub.Size = UDim2.new(1, -120, 0, 18)
     sub.BackgroundTransparency = 1
     sub.Text = "Verificación de licencia"
-    sub.TextColor3 = Color3.fromRGB(190, 140, 165)
+    sub.TextColor3 = Color3.fromRGB(190, 175, 130)
     sub.TextSize = 12
     sub.Font = Enum.Font.Gotham
     sub.TextXAlignment = Enum.TextXAlignment.Left
@@ -173,7 +176,7 @@ local function showWindow(prefill)
     close.Position = UDim2.new(1, -42, 0, 16)
     close.BackgroundColor3 = PANEL
     close.Text = "✕"
-    close.TextColor3 = Color3.fromRGB(210, 160, 185)
+    close.TextColor3 = Color3.fromRGB(200, 180, 140)
     close.TextSize = 13
     close.Font = Enum.Font.GothamBold
     close.Parent = frame
@@ -204,7 +207,7 @@ local function showWindow(prefill)
     box.BackgroundColor3 = PANEL
     box.Text = prefill or ""
     box.PlaceholderText = "SG-PREMIUM-XXXXXXX-XXXXXXX"
-    box.PlaceholderColor3 = Color3.fromRGB(110, 70, 90)
+    box.PlaceholderColor3 = Color3.fromRGB(120, 105, 60)
     box.TextColor3 = Color3.new(1, 1, 1)
     box.TextSize = 14
     box.Font = Enum.Font.Code
@@ -212,14 +215,14 @@ local function showWindow(prefill)
     box.Parent = frame
     corner(box, 10)
     local bst = Instance.new("UIStroke")
-    bst.Color = Color3.fromRGB(80, 30, 55)
+    bst.Color = Color3.fromRGB(75, 60, 25)
     bst.Thickness = 1.5
     bst.Parent = box
     box.Focused:Connect(function()
         TweenService:Create(bst, TweenInfo.new(0.2), { Color = NEON1, Thickness = 2 }):Play()
     end)
     box.FocusLost:Connect(function()
-        TweenService:Create(bst, TweenInfo.new(0.2), { Color = Color3.fromRGB(80, 30, 55), Thickness = 1.5 }):Play()
+        TweenService:Create(bst, TweenInfo.new(0.2), { Color = Color3.fromRGB(75, 60, 25), Thickness = 1.5 }):Play()
     end)
 
     local status = Instance.new("TextLabel")
@@ -227,7 +230,7 @@ local function showWindow(prefill)
     status.Size = UDim2.new(1, -44, 0, 32)
     status.BackgroundTransparency = 1
     status.Text = "Introduce tu key para continuar"
-    status.TextColor3 = Color3.fromRGB(150, 110, 130)
+    status.TextColor3 = Color3.fromRGB(170, 150, 110)
     status.TextSize = 12
     status.TextWrapped = true
     status.Font = Enum.Font.Gotham
@@ -262,7 +265,7 @@ local function showWindow(prefill)
     foot.Size = UDim2.new(1, 0, 0, 14)
     foot.BackgroundTransparency = 1
     foot.Text = "SG HUB · licencia protegida"
-    foot.TextColor3 = Color3.fromRGB(255, 255, 0)
+    foot.TextColor3 = Color3.fromRGB(110, 95, 55)
     foot.TextSize = 10
     foot.Font = Enum.Font.Gotham
     foot.Parent = frame
@@ -334,7 +337,7 @@ local function showWindow(prefill)
         end
 
         busy = true
-        setStatus("Conectando con el servidor...", Color3.fromRGB(190, 140, 165))
+        setStatus("Conectando con el servidor...", Color3.fromRGB(190, 175, 130))
         task.spawn(function()
             local n = 0
             while busy do
