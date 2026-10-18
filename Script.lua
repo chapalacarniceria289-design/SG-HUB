@@ -6,6 +6,7 @@ local LocalPlayer = Players.LocalPlayer
 local playerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 local ENDPOINT = "https://scriptkeeper-hub.lovable.app/api/public/validate"
+local SAVE_FILE = "sghub_key.txt"
 local LOGO_IMAGE = "rbxassetid://135250011530176"
 local req = (syn and syn.request) or http_request or request
 
@@ -42,7 +43,7 @@ local function call(key, heartbeat)
 end
 
 local function launch(data, key)
-    -- ❌ SE ELIMINÓ EL AUTOGUARDADO (writefile)
+    pcall(function() if writefile then writefile(SAVE_FILE, key) end end)
     if data.permanent then
         getgenv().KeyRemaining = -1
     else
@@ -83,7 +84,7 @@ local function corner(o, r)
     return c
 end
 
-local function showWindow() -- Ya no recibe parámetro prefill
+local function showWindow(prefill)
     local gui = Instance.new("ScreenGui")
     gui.Name = "SGKeyWindow"
     gui.ResetOnSpawn = false
@@ -204,7 +205,7 @@ local function showWindow() -- Ya no recibe parámetro prefill
     box.Position = UDim2.new(0, 20, 0, 106)
     box.Size = UDim2.new(1, -40, 0, 44)
     box.BackgroundColor3 = PANEL
-    box.Text = "" -- Siempre inicia vacío
+    box.Text = prefill or ""
     box.PlaceholderText = "SG-PREMIUM-XXXXXXX-XXXXXXX"
     box.PlaceholderColor3 = Color3.fromRGB(120, 105, 60)
     box.TextColor3 = Color3.new(1, 1, 1)
@@ -384,6 +385,18 @@ local function showWindow() -- Ya no recibe parámetro prefill
     close.Activated:Connect(function() gui:Destroy() end)
 end
 
--- ❌ SE ELIMINÓ LA VERIFICACIÓN DE `getgenv().Key` y de `sghub_key.txt`
--- Ahora siempre abrirá la interfaz limpia pidiendo la key de forma manual.
-showWindow()
+local preset = getgenv().Key or script_key
+if preset and preset ~= "" then
+    local key = tostring(preset):gsub("%s+", ""):upper()
+    local data = call(key, false)
+    if data and data.ok then
+        if not launch(data, key) then LocalPlayer:Kick("[SG HUB] Error al cargar el script") end
+        return
+    end
+end
+
+local saved = ""
+pcall(function()
+    if isfile and readfile and isfile(SAVE_FILE) then saved = readfile(SAVE_FILE) end
+end)
+showWindow(saved)
