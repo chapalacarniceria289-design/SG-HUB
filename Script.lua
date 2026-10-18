@@ -10,10 +10,10 @@ local SAVE_FILE = "sghub_key.txt"
 local LOGO_IMAGE = "rbxassetid://135250011530176"
 local req = (syn and syn.request) or http_request or request
 
-local NEON1 = Color3.fromRGB(255, 30, 90)
+local NEON1 = Color3.fromRGB(255, 225, 0)
 local NEON2 = Color3.fromRGB(255, 0, 190)
 local BG = Color3.fromRGB(10, 4, 9)
-local PANEL = Color3.fromRGB(22, 8, 16)
+local PANEL = Color3.fromRGB(255, 225, 0)
 local OK = Color3.fromRGB(60, 255, 150)
 local WARN = Color3.fromRGB(255, 190, 80)
 
